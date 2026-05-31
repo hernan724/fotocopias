@@ -1,203 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora de Fotocopias</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotocopias Blanco y Negro</title>
 
-  <style>
-    *{
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
-    }
+<style>
+:root{
+    --principal:#2563eb;
+    --exito:#16a34a;
+    --fondo:#f4f6f9;
+    --texto:#1f2937;
+    --alerta:#fff4e5;
+    --alerta-borde:#f59e0b;
+}
 
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(135deg,#111,#222);
-      color:white;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
 
-    .card{
-      width:90%;
-      max-width:420px;
-      background:#1f1f1f;
-      padding:30px;
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.5);
-    }
+body{
+    background:var(--fondo);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
 
-    h1{
-      text-align:center;
-      margin-top:0;
-      font-size:2rem;
-    }
+.card{
+    width:100%;
+    max-width:500px;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
 
-    .info{
-      background:#2a2a2a;
-      padding:15px;
-      border-radius:12px;
-      margin-bottom:20px;
-      line-height:1.6;
-    }
+h1{
+    color:var(--principal);
+    text-align:center;
+    margin-bottom:8px;
+}
 
-    label{
-      display:block;
-      margin-bottom:10px;
-      font-size:1.1rem;
-    }
+.subtitulo{
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:25px;
+}
 
-    input{
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:12px;
-      font-size:1.1rem;
-      outline:none;
-      margin-bottom:20px;
-    }
+.aviso{
+    background:var(--alerta);
+    border-left:5px solid var(--alerta-borde);
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:25px;
+    color:#92400e;
+    line-height:1.7;
+}
 
-    .resultado{
-      background:#121212;
-      border:2px solid #444;
-      padding:20px;
-      border-radius:15px;
-    }
+label{
+    display:block;
+    font-weight:600;
+    margin-bottom:10px;
+    color:var(--texto);
+}
 
-    .resultado p{
-      margin:10px 0;
-      font-size:1.1rem;
-    }
+input{
+    width:100%;
+    padding:15px;
+    border:2px solid #d1d5db;
+    border-radius:12px;
+    font-size:1.1rem;
+}
 
-    .precio{
-      font-size:2rem !important;
-      font-weight:bold;
-      color:#00ff95;
-      text-align:center;
-      margin-top:20px !important;
-    }
+input:focus{
+    outline:none;
+    border-color:var(--principal);
+}
 
-    .descuento{
-      color:#ffd54a;
-      font-weight:bold;
-    }
+.resumen{
+    margin-top:25px;
+    text-align:center;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:20px;
+}
 
-    .maximo{
-      color:#ff7070;
-      text-align:center;
-      margin-top:10px;
-      display:none;
-    }
-  </style>
+.texto-total{
+    color:#6b7280;
+    margin-bottom:10px;
+}
+
+.total{
+    font-size:3rem;
+    font-weight:bold;
+    color:var(--exito);
+}
+
+.detalle{
+    margin-top:10px;
+    color:#6b7280;
+}
+
+.btn-whatsapp{
+    display:block;
+    width:100%;
+    margin-top:25px;
+    text-align:center;
+    text-decoration:none;
+    background:#25D366;
+    color:white;
+    padding:16px;
+    border-radius:12px;
+    font-weight:bold;
+    font-size:1rem;
+    transition:.2s;
+}
+
+.btn-whatsapp:hover{
+    transform:scale(1.02);
+}
+
+.footer{
+    margin-top:20px;
+    text-align:center;
+    color:#9ca3af;
+    font-size:.9rem;
+}
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>📄 Fotocopias</h1>
+<div class="card">
 
-    <div class="info">
-  Precio base por copia: <strong>$250</strong><br>
-  Máximo permitido: <strong>40 hojas</strong><br>
-  Descuentos progresivos por cantidad
-  <hr style="margin:10px 0;border-color:#444;">
-  ⚠️ Solo fotocopias en blanco y negro.<br>
-  ❌ No realizamos impresiones a color.<br>
-  ❌ No realizamos impresiones doble faz.
-</div>
+    <h1>📄 Fotocopias Blanco y Negro</h1>
 
-    <label for="copias">Cantidad de copias:</label>
+    <p class="subtitulo">
+        Calculá el precio de tus fotocopias en segundos
+    </p>
 
-    <input 
-      type="number" 
-      id="copias" 
-      min="1" 
-      max="40"
-      value="1"
+    <div class="aviso">
+        ⚠️ Solo realizamos fotocopias en blanco y negro.<br>
+        ❌ No realizamos impresiones a color.<br>
+        ❌ No realizamos impresiones doble faz.<br>
+        📌 Máximo: 40 hojas por pedido.
+    </div>
+
+    <label for="cantidad">Cantidad de hojas</label>
+
+    <input
+        type="number"
+        id="cantidad"
+        min="1"
+        max="40"
+        value="1"
     >
 
-    <div class="maximo" id="maximo">
-      El máximo es 40 hojas
+    <div class="resumen">
+
+        <div class="texto-total">
+            Total a pagar
+        </div>
+
+        <div class="total" id="total">
+            $300
+        </div>
+
+        <div class="detalle" id="detalle">
+            1 fotocopia
+        </div>
+
     </div>
 
-    <div class="resultado">
-      <p>Precio por copia: <strong id="precioUnidad">$250</strong></p>
+    <!-- Reemplazar por tu número -->
+    <a
+        class="btn-whatsapp"
+        href="https://wa.me/543816002620"
+        target="_blank"
+    >
+        Consultar por WhatsApp
+    </a>
 
-      <p class="descuento">
-        Descuento aplicado: <span id="descuento">0%</span>
-      </p>
-
-      <p class="precio">
-        Total: <span id="total">$300</span>
-      </p>
+    <div class="footer">
+        Descuentos automáticos por cantidad.
     </div>
-  </div>
 
-  <script>
-    const input = document.getElementById("copias");
-    const total = document.getElementById("total");
-    const descuento = document.getElementById("descuento");
-    const precioUnidad = document.getElementById("precioUnidad");
-    const maximo = document.getElementById("maximo");
+</div>
 
-    const PRECIO_BASE = 250;
+<script>
 
-    function obtenerDescuento(cantidad){
+const PRECIO_BASE = 250;
 
-      if(cantidad >= 35) return 35;
-      if(cantidad >= 30) return 30;
-      if(cantidad >= 25) return 25;
-      if(cantidad >= 20) return 20;
-      if(cantidad >= 15) return 15;
-      if(cantidad >= 10) return 10;
-      if(cantidad >= 5) return 5;
+const input = document.getElementById("cantidad");
+const total = document.getElementById("total");
+const detalle = document.getElementById("detalle");
 
-      return 0;
-    }
+function descuento(cantidad){
 
-    function redondearCentena(valor){
-      return Math.round(valor / 100) * 100;
-    }
+    if(cantidad >= 35) return 35;
+    if(cantidad >= 30) return 30;
+    if(cantidad >= 25) return 25;
+    if(cantidad >= 20) return 20;
+    if(cantidad >= 15) return 15;
+    if(cantidad >= 10) return 10;
+    if(cantidad >= 5) return 5;
 
-    function calcular() {
+    return 0;
+}
 
-      let cantidad = parseInt(input.value) || 1;
+function redondearCentena(valor){
+    return Math.round(valor / 100) * 100;
+}
 
-      if(cantidad > 40){
+function calcular(){
+
+    let cantidad = parseInt(input.value) || 1;
+
+    if(cantidad < 1) cantidad = 1;
+
+    if(cantidad > 40){
         cantidad = 40;
         input.value = 40;
-        maximo.style.display = "block";
-      } else {
-        maximo.style.display = "none";
-      }
-
-      const descuentoPorcentaje = obtenerDescuento(cantidad);
-
-      const precioFinalUnidad =
-        PRECIO_BASE * (1 - descuentoPorcentaje / 100);
-
-      let precioTotal =
-        cantidad * precioFinalUnidad;
-
-      // Redondear a la centena más cercana
-      precioTotal = redondearCentena(precioTotal);
-
-      descuento.textContent =
-        descuentoPorcentaje + "%";
-
-      precioUnidad.textContent =
-        "$" + precioFinalUnidad.toFixed(0);
-
-      total.textContent =
-        "$" + precioTotal.toLocaleString("es-AR");
     }
 
-    input.addEventListener("input", calcular);
+    const desc = descuento(cantidad);
 
-    calcular();
-  </script>
+    const precioUnidad =
+        PRECIO_BASE * (1 - desc / 100);
+
+    let precioTotal =
+        cantidad * precioUnidad;
+
+    precioTotal =
+        redondearCentena(precioTotal);
+
+    total.textContent =
+        "$" + precioTotal.toLocaleString("es-AR");
+
+    detalle.textContent =
+        cantidad +
+        (cantidad === 1 ? " fotocopia" : " fotocopias");
+}
+
+input.addEventListener("input", calcular);
+
+calcular();
+
+</script>
 
 </body>
 </html>
